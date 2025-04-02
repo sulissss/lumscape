@@ -1,13 +1,191 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'MinecraftFont'; /* Custom name for the font */
+  src: url('../public/fonts/minecraft_font.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'Bloxat'; /* Custom name for the font */
+  src: url('../public/fonts/Bloxat-PDoE.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.custom-font {
+  font-family: 'MinecraftFont', sans-serif; /* Fallback to sans-serif */
+}
+
+.bg-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  /* overflow: hidden; */
+}
+
+.bg-image {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  width: 100%;
+  height: 100%;
+  background-image: url('../public/assets/lums_map.jpeg');
+  /* background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
+  filter: blur(5px); 
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  width: 1000px; /* Adjust size */
+  height: auto;
+  margin-bottom: 20px; /* Space between logo and buttons */
+}
+
+.button {
+  width: 600px; /* Adjust width */
+  /* height: 50px; */
+  padding: 20px 20px;
+  font-size: 20px;
+  font-family: "MinecraftFont", sans-serif; /* Ensure custom font */
+  padding: 15px 15px;
+  margin: 10px 20px;
+  color: white;
+  background: linear-gradient(to bottom, #777, #555); /* Pixelated grey look */
+  border: 2px solid black;
+  text-shadow: 2px 2px black;
+  box-shadow: 4px 4px 0px black;
+  /* border-radius: 6px; */
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.button:hover {
+  background: linear-gradient(to bottom, #999, #777);
+  box-shadow: 2px 2px 0px black;
+  transform: translate(2px, 2px); /* Gives a pressed effect */
+}
+
+
+.bg-login-image {
+  width: 100%;
+  height: 100%;
+  background-image: url('../public/assets/login_screen_cover.png');
+  background-size: cover;
+}
+
+.login-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.account-title {
+  font-size: 100px;
+  font-family: "Bloxat", sans-serif;
+  color: white;
+  text-align: center;
+  padding: 30px 50px;
+  margin-bottom: 20px;
+  text-shadow: 4px 4px black;
+  /* box-shadow: 2px 2px 0px black; */
+}
+
+
+.login-logo {
+  width: 600px; 
+  height: auto;
+  margin-bottom: 80px; 
+}
+
+/* INPUT FIELDS */
+.login-input {
+  width: 90%;
+  padding: 10px;
+  background: #4f4848c7;
+  border: 4px solid rgb(15, 15, 15);
+  color: white;
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 18px;
+  text-align: center;
+  /* text-shadow: 2px 2px rgb(0, 0, 0); */
+  box-shadow: 2px 2px 0px black;
+  outline: none;
+  margin: 0px;
+}
+
+/* BUTTON */
+.login-button {
+  width: 90%;
+  padding: 12px;
+  font-size: 18px;
+  font-family: "MinecraftFont", sans-serif;
+  color: white;
+  background: linear-gradient(to bottom, #777, #555);
+  border: 4px solid black;
+  text-shadow: 2px 2px black;
+  box-shadow: 4px 4px 0px black;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  margin-top: 50px;
+}
+
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.809); /* Change placeholder text color */
+  opacity: 1; /* Ensure full visibility */
+  font-family: "MinecraftFont", sans-serif; /* Ensure consistent font */
+}
+
+.login-button:hover {
+  background: linear-gradient(to bottom, #999, #777);
+  box-shadow: 2px 2px 0px black;
+  transform: translate(2px, 2px);
+}
+
+.success-message {
+  color: white;
+  font-family: 'MinecraftFont';
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  text-shadow: 2px 2px black;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-family: "MinecraftFont", sans-serif;
+  color: white;
+  background: linear-gradient(to bottom, #777, #555);
+  border: 3px solid black;
+  text-shadow: 2px 2px black;
+  box-shadow: 4px 4px 0px black;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.back-button:hover {
+  background: linear-gradient(to bottom, #999, #777);
+  box-shadow: 2px 2px 0px black;
+  transform: translate(2px, 2px);
 }
