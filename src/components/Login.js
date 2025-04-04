@@ -6,7 +6,8 @@ const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault(); // Prevent default form submission
     if (email && password) {
       setIsLoggedIn(true);
       navigate("/");
@@ -19,15 +20,33 @@ const Login = ({ setIsLoggedIn }) => {
     <div className="bg-container">
       <div className="bg-login-image"></div>
 
-      <button className="back-button" onClick={() => navigate("/")}>← Back</button>
+      <button className="back-button" onClick={() => navigate("/")}>
+        ← Back
+      </button>
 
       <div className="login-content">
         <h1 className="account-title">Account Login</h1>
 
-        <input type="email" placeholder="Email" className="login-input" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" className="login-input" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email"
+            className="login-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="login-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <button className="login-button" onClick={handleLogin}>Submit</button>
+          <button className="login-button" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );

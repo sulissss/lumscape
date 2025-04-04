@@ -1,0 +1,80 @@
+/* .exit-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+  } */
+
+
+  .exit-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-family: "MinecraftFont", sans-serif;
+    color: white;
+    background: linear-gradient(to bottom, #777, #555);
+    border: 3px solid black;
+    text-shadow: 2px 2px black;
+    box-shadow: 4px 4px 0px black;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+  }
+  
+  .exit-button:hover {
+    background: linear-gradient(to bottom, #999, #777);
+    box-shadow: 2px 2px 0px black;
+    transform: translate(2px, 2px);
+  }
+  
+  .confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+  }
+  
+  .confirmation-popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .confirmation-buttons {
+    margin-top: 20px;
+  }
+  
+  .confirm-button,
+  .cancel-button {
+    padding: 10px 15px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .confirm-button {
+    background: #4caf50;
+    color: white;
+  }
+  
+  .cancel-button {
+    background: #f44336;
+    color: white;
+  }

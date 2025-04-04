@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const StartupScreen = ({ isLoggedIn }) => {
   const navigate = useNavigate();
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const hasLoggedBefore = sessionStorage.getItem("loggedInBefore");
+      if (!hasLoggedBefore) {
+        setShowLoginMessage(true);
+        sessionStorage.setItem("loggedInBefore", "true");
+      }
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="bg-container">
@@ -11,9 +22,15 @@ const StartupScreen = ({ isLoggedIn }) => {
       <div className="content">
         <img src="/assets/lumscape_logo.png" alt="LUMSCAPE" className="logo" />
 
-        <button className="button">Play Now!</button>
+        <button className="button" onClick={() => navigate(isLoggedIn ? "/map" : "/login")}>
+          Play Now!
+        </button>
         <button className="button">Get Summary</button>
-        <button className="button">Create Event</button>
+        
+        <button className="button" 
+          onClick={() => navigate(isLoggedIn ? "/create-event" : "/login")}>
+            Create Event
+        </button>
 
         {!isLoggedIn ? (
           <div className="flex gap-4">
@@ -25,7 +42,7 @@ const StartupScreen = ({ isLoggedIn }) => {
             </button>
           </div>
         ) : (
-          <p className="success-message">Logged in successfully!</p>
+          showLoginMessage && <p className="success-message">Logged in successfully!</p>
         )}
       </div>
     </div>
