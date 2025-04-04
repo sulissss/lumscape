@@ -1,41 +1,63 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const EventCreation = ({ onBack }) => {
-//   const navigate = useNavigate();
+const EventCreation = () => {
+  const navigate = useNavigate();
   const [eventName, setEventName] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventTiming, setEventTiming] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleSubmit = () => {
-    alert("Event Created Successfully!");
-    // navigate("/");
-    // Here, you can add logic to save the event to a database
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (eventName && eventLocation && eventDescription && eventTiming) {
+      setSuccessMessage("Event Created Successfully!");
+
+      setTimeout(() => {
+        navigate("/");
+        setSuccessMessage(null);
+      }, 1000);
+    } else {
+      setErrorMessage("Please fill in all fields.");
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 3000);
+    }
   };
 
   return (
     <div className="bg-container">
-      {/* Background */}
+      {successMessage && (
+        <div className="success-popup">
+          {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div className="error-popup">
+          {errorMessage}
+        </div>
+      )}
       <div className="bg-login-image"></div>
-
-      {/* Back Button */}
-      <button className="back-button" onClick={onBack}>← Back</button>
-
-      {/* Event Creation Form */}
-      <div className="login-content">
+      <button className="back-button" onClick={() => navigate("/")}>
+        ← Back
+      </button>
+      <form className="login-content" onSubmit={handleSubmit}>
         <h1 className="account-title">Event Creation</h1>
 
-        <input 
-          type="text" 
-          placeholder="Event Name" 
+        <input
+          type="text"
+          placeholder="Event Name"
           className="login-input"
           value={eventName}
           onChange={(e) => setEventName(e.target.value)}
         />
 
-        <select 
-          className="event-select" 
-          value={eventLocation} 
+        <select
+          className="event-select"
+          value={eventLocation}
           onChange={(e) => setEventLocation(e.target.value)}
         >
           <option value="">Select Event Location</option>
@@ -44,16 +66,16 @@ const EventCreation = ({ onBack }) => {
           <option value="Sports Complex">Sports Complex</option>
         </select>
 
-        <textarea 
-          placeholder="Event Description" 
+        <textarea
+          placeholder="Event Description"
           className="login-input"
           value={eventDescription}
           onChange={(e) => setEventDescription(e.target.value)}
         />
 
-        <select 
-          className="event-select" 
-          value={eventTiming} 
+        <select
+          className="event-select"
+          value={eventTiming}
           onChange={(e) => setEventTiming(e.target.value)}
         >
           <option value="">Select Event Timing</option>
@@ -62,8 +84,10 @@ const EventCreation = ({ onBack }) => {
           <option value="Evening">Evening</option>
         </select>
 
-        <button className="login-button" onClick={handleSubmit}>Create Event</button>
-      </div>
+        <button type="submit" className="login-button">
+          Create Event
+        </button>
+      </form>
     </div>
   );
 };

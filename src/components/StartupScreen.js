@@ -11,6 +11,9 @@ const StartupScreen = ({ isLoggedIn }) => {
       if (!hasLoggedBefore) {
         setShowLoginMessage(true);
         sessionStorage.setItem("loggedInBefore", "true");
+        setTimeout(() => {
+          setShowLoginMessage(false);
+        }, 3000);
       }
     }
   }, [isLoggedIn]);
@@ -18,7 +21,11 @@ const StartupScreen = ({ isLoggedIn }) => {
   return (
     <div className="bg-container">
       <div className="bg-image"></div>
-
+      {showLoginMessage && (
+        <div className="success-popup">
+          Logged in successfully!
+        </div>
+      )}
       <div className="content">
         <img src="/assets/lumscape_logo.png" alt="LUMSCAPE" className="logo" />
 
@@ -26,10 +33,9 @@ const StartupScreen = ({ isLoggedIn }) => {
           Play Now!
         </button>
         <button className="button">Get Summary</button>
-        
-        <button className="button" 
-          onClick={() => navigate(isLoggedIn ? "/create-event" : "/login")}>
-            Create Event
+
+        <button className="button" onClick={() => navigate(isLoggedIn ? "/create-event" : "/login")}>
+          Create Event
         </button>
 
         {!isLoggedIn ? (
@@ -41,9 +47,7 @@ const StartupScreen = ({ isLoggedIn }) => {
               Signup
             </button>
           </div>
-        ) : (
-          showLoginMessage && <p className="success-message">Logged in successfully!</p>
-        )}
+        ) : null}
       </div>
     </div>
   );

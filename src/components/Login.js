@@ -5,14 +5,47 @@ const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // Prevent default form submission
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
     if (email && password) {
-      setIsLoggedIn(true);
-      navigate("/");
+      try {
+        const response = await fetch(`${process.env.BACKEND_API}/users/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }), // Send plain password to backend
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            setSuccessMessage("Login successful!");
+            setTimeout(() => {
+              setSuccessMessage(null);
+              setIsLoggedIn(true);
+              navigate("/");
+            }, 3000);
+          } else {
+            setErrorMessage(data.message || "Invalid credentials.");
+            setTimeout(() => setErrorMessage(null), 3000);
+          }
+        } else {
+          setErrorMessage("Login failed. Please try again.");
+          setTimeout(() => setErrorMessage(null), 3000);
+        }
+      } catch (error) {
+        setErrorMessage("Network error. Please try again.");
+        setTimeout(() => setErrorMessage(null), 3000);
+        console.error("Login error:", error);
+      }
     } else {
-      alert("Please enter valid credentials!");
+      setErrorMessage("Please enter valid credentials!");
+      setTimeout(() => setErrorMessage(null), 3000);
     }
   };
 
@@ -23,6 +56,18 @@ const Login = ({ setIsLoggedIn }) => {
       <button className="back-button" onClick={() => navigate("/")}>
         ← Back
       </button>
+
+      {errorMessage && (
+        <div className="error-popup">
+          {errorMessage}
+        </div>
+      )}
+
+      {successMessage && (
+        <div className="success-popup">
+          {successMessage}
+        </div>
+      )}
 
       <div className="login-content">
         <h1 className="account-title">Account Login</h1>

@@ -1,17 +1,15 @@
-/* Settings.css */
-
 .settings-button {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 50px; 
-  height: 50px; 
+  width: 50px;
+  height: 50px;
   padding: 0;
   font-size: 18px;
   font-family: "MinecraftFont", sans-serif;
   background: linear-gradient(to bottom, #777, #555);
-  background-image: url("../../../public/assets/settings_icon.png"); 
-  background-size: cover; 
+  background-image: url("../../../public/assets/settings_icon.png"); /* Path to your settings icon */
+  background-size: cover;
   background-position: center;
   border: none;
   box-shadow: none;
@@ -20,35 +18,88 @@
 }
 
 .settings-button:hover {
-  background-image: url("../../../public/assets/settings_icon.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border: none;
-  box-shadow: none;
   transform: translate(2px, 2px);
+}
+
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 9;
 }
 
 .settings-panel {
   position: absolute;
-  top: 50px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.85);
+  height: 600px;
+  width: 500px;
+  top: 50%;
+  left: 50%;
+  font-family: "MinecraftFont", sans-serif;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.551);
   color: white;
   padding: 20px;
   border-radius: 10px;
-  min-width: 200px;
+  min-width: 300px;
   z-index: 10;
+  text-align: left;
 }
 
 .settings-panel h3 {
   margin-top: 0;
+  margin-bottom: 60px;
+  font-size: 30px;
+  text-align: center;
 }
 
-.back-to-menu-button {
+.setting-item {
+  margin: 30px 20px;
+  /* padding: 10px 10px; */
+}
+
+.setting-item label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.setting-item input[type="range"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+}
+
+.setting-item select {
+  width: 100%;
+  height: 50px; /* Match the height of event-select */
+  padding: 10px 10px;
+  background: #4f4848c7;
+  border: 4px solid rgb(15, 15, 15);
+  color: white;
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 18px;
+  box-shadow: 2px 2px 0px black;
+  outline: none;
+  background-color: #1e1c1ce0;
+  text-align: center;
+  text-align-last: center;
+}
+
+.setting-item select:hover {
+  background-color: #666;
+  text-align: center;
+  text-align-last: center;
+}
+
+.fullscreen-button {
   width: 100%;
   padding: 10px;
-  margin-top: 10px;
   background: linear-gradient(to bottom, #777, #555);
   border: 3px solid black;
   color: white;
@@ -61,8 +112,26 @@
   transition: all 0.1s ease-in-out;
 }
 
-.back-to-menu-button:hover {
-  background: linear-gradient(to bottom, #999, #777);
-  box-shadow: 2px 2px 0px black;
+.fullscreen-button:hover {
+  transform: translate(2px, 2px);
+}
+
+.back-to-map-button {
+  width: 80%; /* Match other button widths */
+  padding: 10px;
+  background: linear-gradient(to bottom, #777, #555);
+  border: 3px solid black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "MinecraftFont", sans-serif;
+  text-shadow: 2px 2px black;
+  box-shadow: 4px 4px 0px black;
+  transition: all 0.1s ease-in-out;
+  margin-top: 20px; /* Add space above the button */
+}
+
+.back-to-map-button:hover {
   transform: translate(2px, 2px);
 }
