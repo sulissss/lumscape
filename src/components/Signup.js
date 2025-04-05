@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// const API_ENDPOINT = process.env.BACKEND_API;
+import axios from "axios";
 
 const Signup = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -16,30 +15,31 @@ const Signup = ({ setIsLoggedIn }) => {
 
     if (email && password === confirmPassword) {
       try {
-        const response = await fetch('http://localhost:10000/users/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password, scope: "user" }), // Send plain password to backend
+        await axios.post('http://localhost:10000/users/signup', {
+          email: email,
+          password: password,
+          scope: "user",
         });
 
-        if (response.ok) {
-          setSuccessMessage("Signup successful!");
-          setTimeout(() => {
-            setSuccessMessage(null);
-            setIsLoggedIn(true);
-            navigate("/");
-          }, 1000);
-        } else {
-          const errorData = await response.json();
-          setErrorMessage(errorData.message || 'Unknown error');
-          setTimeout(() => setErrorMessage(null), 3000);
-        }
+        setSuccessMessage("Signup successful!");
+        setTimeout(() => {
+          setSuccessMessage(null);
+          setIsLoggedIn(true);
+          navigate("/");
+        }, 1000);
+
       } catch (error) {
-        setErrorMessage('Network error. Please try again.');
+        if (error.response) {
+          setErrorMessage(error.response.data.message || 'Signup failed. Please try again.');
+          console.error('Signup error (server response):', error.response);
+        } else if (error.request) {
+          setErrorMessage('Network error. Please try again.');
+          console.error('Signup error (no response):', error.request);
+        } else {
+          setErrorMessage('An unexpected error occurred. Please try again.');
+          console.error('Signup error (other):', error.message);
+        }
         setTimeout(() => setErrorMessage(null), 3000);
-        console.error('Signup error:', error);
       }
     } else {
       setErrorMessage("Please check your details!");

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'; // Import axios
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -13,29 +14,20 @@ const Login = ({ setIsLoggedIn }) => {
 
     if (email && password) {
       try {
-        const response = await fetch(`${process.env.BACKEND_API}/users/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }), // Send plain password to backend
+        const response = await axios.post('http://localhost:10000/users/login', {
+          email,
+          password,
         });
 
-        if (response.ok) {
-          const data = await response.json();
-          if (data.success) {
-            setSuccessMessage("Login successful!");
-            setTimeout(() => {
-              setSuccessMessage(null);
-              setIsLoggedIn(true);
-              navigate("/");
-            }, 3000);
-          } else {
-            setErrorMessage(data.message || "Invalid credentials.");
-            setTimeout(() => setErrorMessage(null), 3000);
-          }
+        if (response.data.success) {
+          setSuccessMessage("Login successful!");
+          setTimeout(() => {
+            setSuccessMessage(null);
+            setIsLoggedIn(true);
+            navigate("/");
+          }, 3000);
         } else {
-          setErrorMessage("Login failed. Please try again.");
+          setErrorMessage(response.data.message || "Invalid credentials.");
           setTimeout(() => setErrorMessage(null), 3000);
         }
       } catch (error) {
@@ -57,17 +49,9 @@ const Login = ({ setIsLoggedIn }) => {
         ← Back
       </button>
 
-      {errorMessage && (
-        <div className="error-popup">
-          {errorMessage}
-        </div>
-      )}
+      {errorMessage && <div className="error-popup">{errorMessage}</div>}
 
-      {successMessage && (
-        <div className="success-popup">
-          {successMessage}
-        </div>
-      )}
+      {successMessage && <div className="success-popup">{successMessage}</div>}
 
       <div className="login-content">
         <h1 className="account-title">Account Login</h1>
