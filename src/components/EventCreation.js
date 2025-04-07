@@ -15,13 +15,22 @@ const EventCreation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const locationMap = {
+      "SSE": 1,
+      "SDSB": 2,
+      "SOE": 3,
+      "SAHSOL": 4,
+      "HSS": 5,
+      "PDC": 6,
+    };
+
     if (eventName && eventLocation && eventDescription && eventDate && eventTime) {
       try {
         const response = await axios.post(
           "https://lums-3d-planner.vercel.app/events",
           {
             eventName,
-            eventLocation,
+            eventLocationID: locationMap[eventLocation],
             eventDescription,
             eventDate,
             eventTime,
