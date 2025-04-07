@@ -7,7 +7,7 @@ import EventCreation from "./components/EventCreation";
 import UnityMap from "./components/MapComponents/UnityMap"; // Import Unity Map component
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <Router>

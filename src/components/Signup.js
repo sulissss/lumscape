@@ -15,7 +15,7 @@ const Signup = ({ setIsLoggedIn }) => {
 
     if (email && password === confirmPassword) {
       try {
-        await axios.post('http://localhost:10000/users/signup', {
+        await axios.post('https://lums-3d-planner.vercel.app/users/signup', {
           email: email,
           password: password,
           scope: "user",

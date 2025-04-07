@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'; // Import axios
+import axios from 'axios'; 
 
 const Login = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     if (email && password) {
       try {
-        const response = await axios.post('http://localhost:10000/users/login', {
+        const response = await axios.post('https://lums-3d-planner.vercel.app/users/login', {
           email,
           password,
         });

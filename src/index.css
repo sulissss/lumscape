@@ -128,12 +128,12 @@
   
   box-shadow: 2px 2px 0px black;
   outline: none;
-  margin: 0px;
+  margin: 20px 0px 0px 0px;
 }
 
 
 .login-button {
-  width: 90%;
+  width: 93%;
   padding: 12px;
   font-size: 18px;
   font-family: "MinecraftFont", sans-serif;
@@ -190,6 +190,43 @@
   transform: translate(2px, 2px);
 }
 
+
+.date-time-p {
+  width: 90%;
+  padding: 10px;
+  color: white;
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 22px;
+  text-align: center;
+  outline: none;
+  margin-bottom: 0px;
+
+  /* Add stronger text shadow */
+  text-shadow: 3px 3px 0px black, /* Main shadow */
+               5px 5px 0px rgba(0, 0, 0, 0.5); /* Secondary, softer shadow */
+
+  /* Add a subtle background or border for emphasis */
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  /* OR */
+  /* border: 2px solid #555; /* Dark border */
+  padding: 10px;
+}
+
+.date-time-select {
+  width: 90%;
+  padding: 10px;
+  background: #4f4848c7;
+  border: 4px solid rgb(15, 15, 15);
+  color: white;
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 18px;
+  text-align: center;
+  
+  box-shadow: 2px 2px 0px black;
+  outline: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
 /* ########################################################################
 EVENT CREATION.JS BELOW
