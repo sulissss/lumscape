@@ -7,7 +7,7 @@ const UnityMap = () => {
   return (
     <div className="unity-map-container">
       <iframe
-        src="https://sulissss.github.io/webgl-unity-build/"
+        src="https://elegant-macaron-53ee65.netlify.app/"
         title="Unity Map"
         className="unity-map-iframe"
       ></iframe>
