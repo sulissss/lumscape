@@ -4,7 +4,7 @@ import StartupScreen from "./components/Main/StartupScreen";
 import Login from "./components/Main/Login";
 import Signup from "./components/Main/Signup";
 import EventCreation from "./components/Main/EventCreation";
-import UnityMap from "./components/Map/UnityMap"; // Import Unity Map component
+import UnityMap from "./components/Map/UnityMap";
 
 import { useEffect } from "react";
 
