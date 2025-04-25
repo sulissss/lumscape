@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./SettingsButton.css";
+import "../../style/map/SettingsButton.css";
 
 const SettingsButton = () => {
   const [showSettings, setShowSettings] = useState(false);

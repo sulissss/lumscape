@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import StartupScreen from "./components/StartupScreen";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import EventCreation from "./components/EventCreation";
-import UnityMap from "./components/MapComponents/UnityMap"; // Import Unity Map component
+import StartupScreen from "./components/Main/StartupScreen";
+import Login from "./components/Main/Login";
+import Signup from "./components/Main/Signup";
+import EventCreation from "./components/Main/EventCreation";
+import UnityMap from "./components/Map/UnityMap"; // Import Unity Map component
+
+import { useEffect } from "react";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Decoy request to backend for DB warmup
+    fetch("https://lums-3d-planner.vercel.app/events").catch(() => {});
+  }, []);
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<StartupScreen isLoggedIn={isLoggedIn} />} />
+        <Route path="/" element={<StartupScreen isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/create-event" element={<EventCreation />} />

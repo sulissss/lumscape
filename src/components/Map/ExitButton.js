@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./ExitButton.css";
+import "../../style/map/ExitButton.css";
 
 const ExitButton = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);

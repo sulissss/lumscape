@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../style/main/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'; 
 
@@ -26,14 +27,13 @@ const Login = ({ setIsLoggedIn }) => {
             setIsLoggedIn(true);
             navigate("/");
           }, 3000);
-        } else {
-          setErrorMessage(response.data.message || "Invalid credentials.");
-          setTimeout(() => setErrorMessage(null), 3000);
         }
       } catch (error) {
-        setErrorMessage("Network error. Please try again.");
-        setTimeout(() => setErrorMessage(null), 3000);
-        console.error("Login error:", error);
+        if (error.response && error.response.status === 401) {
+          setErrorMessage("Invalid credentials. Try Again.");
+        } else {
+          setErrorMessage("Network error. Please try again.");
+        }
       }
     } else {
       setErrorMessage("Please enter valid credentials!");
