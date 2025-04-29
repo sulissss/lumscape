@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import Summary from "./Summary";
 import HowToPlay from "./HowToPlay";
+import Summary from "./Summary";
 import "../../style/main/StartupScreen.css"; // assuming your css is here
 
 const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {

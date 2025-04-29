@@ -9,20 +9,8 @@ const SettingsButton = () => {
   const [loadingHowToPlay, setLoadingHowToPlay] = useState(false);
   const [howToPlayInstructions, setHowToPlayInstructions] = useState("");
   const [howToPlayError, setHowToPlayError] = useState(null);
-  const [musicVolume, setMusicVolume] = useState(1);
-  const [graphicsQuality, setGraphicsQuality] = useState("High");
   const [fullscreen, setFullscreen] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
-
-  const handleMusicVolumeChange = (e) => {
-    setMusicVolume(parseFloat(e.target.value));
-    // Implement your music volume logic here
-  };
-
-  const handleGraphicsQualityChange = (e) => {
-    setGraphicsQuality(e.target.value);
-    // Implement your graphics quality logic here
-  };
 
   const handleFullscreenToggle = () => {
     if (!fullscreen) {
@@ -70,17 +58,8 @@ const SettingsButton = () => {
           <div className="settings-panel">
             <h3>Settings</h3>
 
-            <div className= "setting-item">
-              <label>Back to Map:</label>
-              <button 
-                className="fullscreen-button"
-                onClick={handleBackToMap}>
-                Close Menu
-              </button>
-            </div>
-
             <div className="setting-item">
-              <label>How to Play?</label>
+              <label>Game Instructions:</label>
               <button
                 className="fullscreen-button"
                 onClick={async () => {
@@ -105,29 +84,6 @@ const SettingsButton = () => {
               </button>
             </div>
 
-            {/* <div className="setting-item">
-              <label>Music Volume:</label>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.1"
-                value={musicVolume}
-                onChange={handleMusicVolumeChange}
-              />
-            </div> */}
-
-            <div className="setting-item">
-              <label>Graphics Quality:</label>
-              <select
-                value={graphicsQuality}
-                onChange={handleGraphicsQualityChange}
-              >
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </div>
 
             <div className="setting-item">
               <label>Fullscreen:</label>
@@ -138,6 +94,16 @@ const SettingsButton = () => {
                 {fullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
               </button>
             </div>
+
+            <div className= "setting-item">
+              <label>Back to Map:</label>
+              <button 
+                className="fullscreen-button"
+                onClick={handleBackToMap}>
+                Close Menu
+              </button>
+            </div>
+
 
           </div>
         </>
@@ -150,6 +116,7 @@ const SettingsButton = () => {
             setShowHowToPlay(false);
             navigate('/map');
           }}
+          origin="settings"
         />
       )}
     </>
