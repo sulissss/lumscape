@@ -96,8 +96,8 @@
   margin: auto;
   filter: brightness(0) invert(1);
   position: fixed;
-  top: 38px;
-  right: 22px;
+  top: 32px;
+  right: 30px;
 }
 
 /* .sound-toggle-btn:hover {
