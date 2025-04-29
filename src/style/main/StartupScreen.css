@@ -15,12 +15,6 @@
   display: block;
 }
 
-/* color: white;
-background: linear-gradient(to bottom, #777, #555); 
-border: 2px solid black;
-text-shadow: 2px 2px black;
-box-shadow: 4px 4px 0px black; */
-
 
 .logout-button:hover {
   box-shadow: 2px 2px 0px black;
@@ -74,3 +68,38 @@ box-shadow: 4px 4px 0px black; */
   box-shadow: 2px 2px 0px black;
   transform: translate(2px, 2px);
 }
+
+.sound-toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 15px 15px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  font-size: 18px;
+  font-family: "MinecraftFont", sans-serif;
+  color: white;
+  background: linear-gradient(to bottom, #777, #555);
+  border: 3px solid black;
+  text-shadow: 2px 2px black;
+  box-shadow: 4px 4px 0px black;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.sound-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+  filter: brightness(0) invert(1);
+  position: fixed;
+  top: 35px;
+  right: 20px;
+}
+
+/* .sound-toggle-btn:hover {
+  transform: translate(2px, 2px);
+} */

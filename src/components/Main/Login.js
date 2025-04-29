@@ -21,12 +21,15 @@ const Login = ({ setIsLoggedIn }) => {
         });
 
         if (response.data.success) {
+          // setSuccessMessage(null);
+          // setIsLoggedIn(true);
+          // navigate("/");
           setSuccessMessage("Login successful!");
           setTimeout(() => {
             setSuccessMessage(null);
             setIsLoggedIn(true);
             navigate("/");
-          }, 3000);
+          }, 500);
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {

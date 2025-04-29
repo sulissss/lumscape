@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 import Summary from "./Summary";
-import "../../style/main/StartupScreen.css";
+import "../../style/main/StartupScreen.css"; // assuming your css is here
 
 const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [showLoginMessage, setShowLoginMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null); // Add error message state
-
-  // Summary modal state
+  const [errorMessage, setErrorMessage] = useState(null);
   const [showSummary, setShowSummary] = useState(false);
   const [events, setEvents] = useState([]);
   const [loadingSummary, setLoadingSummary] = useState(false);
   const [summaryError, setSummaryError] = useState(null);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  
+  const [soundOn, setSoundOn] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const audioRef = useRef(null);
 
-  // Utility: Check if cache is valid (less than 24 hours old)
   const isCacheValid = (timestamp) => {
     if (!timestamp) return false;
     const now = Date.now();
-    return now - timestamp < 24 * 60 * 60 * 1000; // 24 hours
+    return now - timestamp < 24 * 60 * 60 * 1000;
   };
 
-  // On mount: fetch and cache events if needed
   useEffect(() => {
     const cached = localStorage.getItem("lumscape_events_cache");
     const cachedTime = localStorage.getItem("lumscape_events_cache_time");
@@ -45,7 +46,6 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   }, []);
 
-  // Always use cached events for Get Summary
   const handleGetSummary = async () => {
     if (isLoggedIn) {
       setLoadingSummary(true);
@@ -54,9 +54,9 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
         const cached = localStorage.getItem("lumscape_events_cache");
         if (cached) {
           setEvents(JSON.parse(cached));
-        setShowSummary(true);
-      } else {
-        throw new Error("No events cached");
+          setShowSummary(true);
+        } else {
+          throw new Error("No events cached");
         }
       } catch (err) {
         setSummaryError("Could not load event summaries. Please try again later.");
@@ -118,9 +118,44 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
     navigate("/");
   };
 
+  const handleToggleSound = () => {
+    setHasInteracted(true);
+    setSoundOn((prev) => {
+      const newState = !prev;
+      if (audioRef.current) {
+        if (newState) {
+          audioRef.current.play();
+        } else {
+          audioRef.current.pause();
+        }
+      }
+      return newState;
+    });
+  };
+
   return (
     <div className="bg-container">
+      {/* Sound Toggle Button */}
+      <button
+        className="sound-toggle-btn"
+        onClick={handleToggleSound}
+        style={{ position: "absolute", top: 20, right: 20, zIndex: 10 }}
+        aria-label={soundOn ? "Mute sound" : "Unmute sound"}
+      >
+        {soundOn ? <img src="/assets/sound-on.png" alt="Sound On"  className="sound-icon" /> 
+                  : <img src="/assets/sound-off.png" alt="Sound Off" className="sound-icon"  />}
+      </button>
+      {/* Background Music */}
+      <audio
+        ref={audioRef}
+        src="/assets/background_music.mp3"
+        loop
+        autoPlay
+        style={{ display: "none" }}
+      />
+
       <div className="bg-image"></div>
+      
       {showLoginMessage && (
         <div className="success-popup">
           Logged in successfully!
@@ -160,8 +195,7 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
             Logout
           </button>
         )}
-
-        {!isLoggedIn ? (
+        {!isLoggedIn && (
           <div className="flex gap-4">
             <button className="button" style={{ width: "120px" }} onClick={() => navigate("/login")}>
               Login
@@ -170,7 +204,7 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
               Signup
             </button>
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );
