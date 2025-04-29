@@ -22,14 +22,13 @@ const EventCreation = () => {
       "SOE / Library": 3,
       "SAHSOL": 4,
       "HSS": 5,
-      "PDC": 6,
+      "Khoka / PDC": 6,
       "LUMS Mosque": 7,
       "Sports Complex": 8,
-      "Khoka": 9,
-      "LUMS Aquatic Centre": 10,
-      "REDC": 11,
-      "Male Hostels": 12,
-      "Female Hostels": 13
+      "LUMS Aquatic Centre": 9,
+      "REDC": 10,
+      "Male Hostels": 11,
+      "Female Hostels": 12
     };
 
     if (eventName && eventLocation && eventDescription && eventDate && eventTime) {
@@ -102,10 +101,9 @@ const EventCreation = () => {
           <option value="SOE / Library">SOE / Library</option>
           <option value="SAHSOL">SAHSOL</option>
           <option value="HSS">HSS</option>
-          <option value="PDC">PDC</option>
+          <option value="Khoka / PDC">Khoka / PDC</option>
           <option value="LUMS Mosque">LUMS Mosque</option>
           <option value="Sports Complex">Sports Complex</option>
-          <option value="Khoka">Khoka</option>
           <option value="LUMS Aquatic Centre">LUMS Aquatic Centre</option>
           <option value="REDC">REDC</option>
           <option value="Male Hostels">Male Hostels</option>
