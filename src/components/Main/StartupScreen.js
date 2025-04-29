@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import Summary from "./Summary";
+import HowToPlay from "./HowToPlay";
 import "../../style/main/StartupScreen.css"; // assuming your css is here
 
 const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -13,6 +14,12 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
   const [loadingSummary, setLoadingSummary] = useState(false);
   const [summaryError, setSummaryError] = useState(null);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+  // How to Play modal state
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [loadingHowToPlay, setLoadingHowToPlay] = useState(false);
+  const [howToPlayInstructions, setHowToPlayInstructions] = useState("");
+  const [howToPlayError, setHowToPlayError] = useState(null);
   
   const [soundOn, setSoundOn] = useState(true);
   // const [hasInteracted, setHasInteracted] = useState(false);
@@ -179,6 +186,7 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
         <button className="button" onClick={handlePlayNow}>
           Play Now!
         </button>
+
         <button className="button" onClick={handleGetSummary}>
           {loadingSummary ? "Loading..." : "Get Summary"}
         </button>
@@ -186,9 +194,34 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
         {showSummary && (
           <Summary events={events} onClose={handleCloseSummary} />
         )}
+        {showHowToPlay && (
+          <HowToPlay
+            instructions={loadingHowToPlay ? 'Loading...' : howToPlayInstructions}
+            onClose={() => setShowHowToPlay(false)}
+          />
+        )}
 
         <button className="button" onClick={handleCreateEvent}>
           Create Event
+        </button>
+
+        <button className="button" onClick={async () => {
+          setLoadingHowToPlay(true);
+          setShowHowToPlay(true);
+          setHowToPlayError(null);
+          try {
+            const res = await fetch('/how_to_play.txt');
+            if (!res.ok) throw new Error('Failed to fetch instructions');
+            const text = await res.text();
+            setHowToPlayInstructions(text);
+          } catch (err) {
+            setHowToPlayInstructions('');
+            setHowToPlayError('Could not load instructions.');
+          } finally {
+            setLoadingHowToPlay(false);
+          }
+        }}>
+          How to Play?
         </button>
         {isLoggedIn && (
           <button className="logout-button" onClick={() => setShowLogoutConfirm(true)}>

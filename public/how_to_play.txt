@@ -1,0 +1,10 @@
+Welcome to Lumscape!
+
+1. Use the navigation buttons to explore the 3D map.
+2. Click on buildings or areas to view more information or events.
+3. Use the 'Create Event' button to add your own events to the map.
+4. Use the sound toggle to mute or unmute background music.
+5. Log in or sign up to unlock all features.
+6. For help, click the 'How to Play?' button anytime!
+
+Enjoy your adventure!

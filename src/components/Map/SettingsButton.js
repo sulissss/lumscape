@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../../style/map/SettingsButton.css";
+import HowToPlay from "../Main/HowToPlay";
 
 const SettingsButton = () => {
   const [showSettings, setShowSettings] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [loadingHowToPlay, setLoadingHowToPlay] = useState(false);
+  const [howToPlayInstructions, setHowToPlayInstructions] = useState("");
+  const [howToPlayError, setHowToPlayError] = useState(null);
   const [musicVolume, setMusicVolume] = useState(1);
   const [graphicsQuality, setGraphicsQuality] = useState("High");
   const [fullscreen, setFullscreen] = useState(false);
@@ -58,7 +63,7 @@ const SettingsButton = () => {
         {/* Settings Icon (image from CSS) */}
       </button>
 
-      {showSettings && (
+      {showSettings && !showHowToPlay && (
         <>
           <div className="settings-overlay"></div>
 
@@ -69,11 +74,36 @@ const SettingsButton = () => {
               <label>Back to Map:</label>
               <button 
                 className="fullscreen-button"
-              onClick={handleBackToMap}>
+                onClick={handleBackToMap}>
                 Close Menu
               </button>
             </div>
-            
+
+            <div className="setting-item">
+              <label>How to Play?</label>
+              <button
+                className="fullscreen-button"
+                onClick={async () => {
+                  setLoadingHowToPlay(true);
+                  setShowHowToPlay(true);
+                  setShowSettings(false);
+                  setHowToPlayError(null);
+                  try {
+                    const res = await fetch('/how_to_play.txt');
+                    if (!res.ok) throw new Error('Failed to fetch instructions');
+                    const text = await res.text();
+                    setHowToPlayInstructions(text);
+                  } catch (err) {
+                    setHowToPlayInstructions('');
+                    setHowToPlayError('Could not load instructions.');
+                  } finally {
+                    setLoadingHowToPlay(false);
+                  }
+                }}
+              >
+                How to Play?
+              </button>
+            </div>
 
             {/* <div className="setting-item">
               <label>Music Volume:</label>
@@ -109,9 +139,18 @@ const SettingsButton = () => {
               </button>
             </div>
 
-            
           </div>
         </>
+      )}
+
+      {showHowToPlay && (
+        <HowToPlay
+          instructions={loadingHowToPlay ? 'Loading...' : howToPlayInstructions}
+          onClose={() => {
+            setShowHowToPlay(false);
+            navigate('/map');
+          }}
+        />
       )}
     </>
   );

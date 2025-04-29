@@ -19,10 +19,17 @@ const EventCreation = () => {
     const locationMap = {
       "SSE": 1,
       "SDSB": 2,
-      "SOE": 3,
+      "SOE / Library": 3,
       "SAHSOL": 4,
       "HSS": 5,
       "PDC": 6,
+      "LUMS Mosque": 7,
+      "Sports Complex": 8,
+      "Khoka": 9,
+      "LUMS Aquatic Centre": 10,
+      "REDC": 11,
+      "Male Hostels": 12,
+      "Female Hostels": 13
     };
 
     if (eventName && eventLocation && eventDescription && eventDate && eventTime) {
@@ -31,10 +38,10 @@ const EventCreation = () => {
           "https://lums-3d-planner.vercel.app/events",
           {
             eventName,
-            eventLocationID: locationMap[eventLocation],
             eventDescription,
             eventDate,
             eventTime,
+            eventLocationID: locationMap[eventLocation]
           }
         );
 
@@ -92,10 +99,17 @@ const EventCreation = () => {
           <option value="">Select Event Location</option>
           <option value="SSE">SSE</option>
           <option value="SDSB">SDSB</option>
-          <option value="SOE">SOE</option>
+          <option value="SOE / Library">SOE / Library</option>
           <option value="SAHSOL">SAHSOL</option>
           <option value="HSS">HSS</option>
           <option value="PDC">PDC</option>
+          <option value="LUMS Mosque">LUMS Mosque</option>
+          <option value="Sports Complex">Sports Complex</option>
+          <option value="Khoka">Khoka</option>
+          <option value="LUMS Aquatic Centre">LUMS Aquatic Centre</option>
+          <option value="REDC">REDC</option>
+          <option value="Male Hostels">Male Hostels</option>
+          <option value="Female Hostels">Female Hostels</option>
         </select>
 
         <textarea
