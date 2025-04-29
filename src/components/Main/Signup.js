@@ -3,47 +3,57 @@ import "../../style/main/Signup.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Signup = ({ setIsLoggedIn }) => {
+const Signup = ({ setIsLoggedIn, setUserScope }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  // const [scope, setScope] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    const scope = "user";
 
-    if (email && password === confirmPassword) {
-      try {
-        await axios.post('https://lums-3d-planner.vercel.app/users/signup', {
-          email: email,
-          password: password,
-          scope: "user",
-        });
+    if (!email || !password || !confirmPassword) {
+      setErrorMessage("Please fill in all fields.");
+      setTimeout(() => setErrorMessage(null), 3000);
+      return;
+    }
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      setTimeout(() => setErrorMessage(null), 3000);
+      return;
+    }
 
-        setSuccessMessage("Signup successful!");
-        setTimeout(() => {
-          setSuccessMessage(null);
-          setIsLoggedIn(true);
-          navigate("/");
-        }, 1000);
+    try {
+      await axios.post('https://lums-3d-planner.vercel.app/users/signup', {
+        email: email,
+        password: password,
+        scope: scope,
+      });
 
-      } catch (error) {
-        if (error.response) {
-          setErrorMessage(error.response.data.message || 'Signup failed. Please try again.');
-          console.error('Signup error (server response):', error.response);
-        } else if (error.request) {
-          setErrorMessage('Network error. Please try again.');
-          console.error('Signup error (no response):', error.request);
-        } else {
-          setErrorMessage('An unexpected error occurred. Please try again.');
-          console.error('Signup error (other):', error.message);
-        }
-        setTimeout(() => setErrorMessage(null), 3000);
+      // localStorage.setItem("userScope", scope);
+      setUserScope(scope);
+      setSuccessMessage("Signup successful!");
+      setTimeout(() => {
+        setSuccessMessage(null);
+        setIsLoggedIn(true);
+        navigate("/");
+      }, 1000);
+
+    } catch (error) {
+      if (error.response) {
+        setErrorMessage(error.response.data.message || 'Signup failed. Please try again.');
+        console.error('Signup error (server response):', error.response);
+      } else if (error.request) {
+        setErrorMessage('Network error. Please try again.');
+        console.error('Signup error (no response):', error.request);
+      } else {
+        setErrorMessage('An unexpected error occurred. Please try again.');
+        console.error('Signup error (other):', error.message);
       }
-    } else {
-      setErrorMessage("Please check your details!");
       setTimeout(() => setErrorMessage(null), 3000);
     }
   };
@@ -93,6 +103,16 @@ const Signup = ({ setIsLoggedIn }) => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+
+          {/* <select
+            className="scope-select"
+            value={scope}
+            onChange={(e) => setScope(e.target.value)}
+          >
+            <option value="">Select Account Type</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select> */}
 
           <button className="login-button" type="submit">
             Create an Account

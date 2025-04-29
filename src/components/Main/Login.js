@@ -3,7 +3,7 @@ import "../../style/main/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'; 
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setIsLoggedIn, setUserScope }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,9 +21,11 @@ const Login = ({ setIsLoggedIn }) => {
         });
 
         if (response.data.success) {
-          // setSuccessMessage(null);
-          // setIsLoggedIn(true);
-          // navigate("/");
+          // Store user scope (admin/user) in localStorage
+          if (response.data.message) {
+            setUserScope(response.data.message);
+            // localStorage.setItem("userScope", response.data.message);
+          }
           setSuccessMessage("Login successful!");
           setTimeout(() => {
             setSuccessMessage(null);

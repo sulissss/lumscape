@@ -9,7 +9,8 @@ import UnityMap from "./components/Map/UnityMap";
 import { useEffect } from "react";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userScope, setUserScope] = useState(localStorage.getItem('userScope') || null);
 
   useEffect(() => {
     // Decoy request to backend for DB warmup
@@ -19,9 +20,9 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<StartupScreen isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/" element={<StartupScreen isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userScope={userScope} />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserScope={setUserScope} />} />
+        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn} setUserScope={setUserScope} />} />
         <Route path="/create-event" element={<EventCreation />} />
         <Route path="/map" element={<UnityMap />} /> {/* Route for Unity map */}
       </Routes>

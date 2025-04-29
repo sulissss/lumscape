@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import HowToPlay from "./HowToPlay";
 import Summary from "./Summary";
-import "../../style/main/StartupScreen.css"; // assuming your css is here
+import "../../style/main/StartupScreen.css";
 
-const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
+const StartupScreen = ({ isLoggedIn, setIsLoggedIn, userScope }) => {
   const navigate = useNavigate();
   const [showLoginMessage, setShowLoginMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -22,7 +22,6 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
   const [howToPlayError, setHowToPlayError] = useState(null);
   
   const [soundOn, setSoundOn] = useState(true);
-  // const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef(null);
 
   const isCacheValid = (timestamp) => {
@@ -201,9 +200,11 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
           />
         )}
 
-        <button className="button" onClick={handleCreateEvent}>
-          Create Event
-        </button>
+        {(
+          <button className="button" onClick={handleCreateEvent}>
+            Create Event
+          </button>
+        )}
 
         <button className="button" onClick={async () => {
           setLoadingHowToPlay(true);

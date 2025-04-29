@@ -26,15 +26,56 @@
   margin-bottom: 6px;
 }
 
-.signup-form input {
-  padding: 10px 12px;
-  border: 2px solid #555;
+/* .scope-select {
+  padding: 20px 22px;
+  border: 4px solid #555;
   border-radius: 5px;
   font-size: 1rem;
   font-family: 'MinecraftFont', 'monospace', sans-serif;
   background: #222;
   color: #fff;
+  margin-top: 15px;
+  margin-bottom: 12px;
+  left: auto;
+  height: 50px;
 }
+
+.scope-select:focus {
+  outline: none;
+  border-color: #888;
+}
+
+.scope-select option {
+  background: #222;
+  color: #fff;
+} */
+
+.scope-select {
+  width: 93.5%;
+  height: 50px;
+  padding: 10px 10px;
+  background: #4f4848c7;
+  border: 4px solid rgb(15, 15, 15);
+  color: white;
+  font-family: "MinecraftFont", sans-serif;
+  font-size: 18px;
+  box-shadow: 2px 2px 0px black;
+  outline: none;
+  /* margin: 12px 0px; */
+  margin-top: 50px;
+  margin-bottom: 12px;
+  background-color: #1e1c1ce0;
+  text-align: center;
+  text-align-last: center;
+}
+
+.scope-select:hover {
+  background-color: #666;
+  text-align: center;
+  text-align-last: center;
+}
+
+
 
 .signup-form button {
   margin-top: 12px;
