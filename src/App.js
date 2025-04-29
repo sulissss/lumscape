@@ -9,7 +9,7 @@ import UnityMap from "./components/Map/UnityMap";
 import { useEffect } from "react";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     // Decoy request to backend for DB warmup

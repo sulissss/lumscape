@@ -75,7 +75,7 @@ const SettingsButton = () => {
             </div>
             
 
-            <div className="setting-item">
+            {/* <div className="setting-item">
               <label>Music Volume:</label>
               <input
                 type="range"
@@ -85,7 +85,7 @@ const SettingsButton = () => {
                 value={musicVolume}
                 onChange={handleMusicVolumeChange}
               />
-            </div>
+            </div> */}
 
             <div className="setting-item">
               <label>Graphics Quality:</label>

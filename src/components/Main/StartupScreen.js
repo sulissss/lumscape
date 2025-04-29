@@ -15,7 +15,7 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   
   const [soundOn, setSoundOn] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  // const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef(null);
 
   const isCacheValid = (timestamp) => {
@@ -119,7 +119,7 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   const handleToggleSound = () => {
-    setHasInteracted(true);
+    // setHasInteracted(true);
     setSoundOn((prev) => {
       const newState = !prev;
       if (audioRef.current) {
