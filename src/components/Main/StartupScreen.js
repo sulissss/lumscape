@@ -15,7 +15,6 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn, userScope }) => {
   const [summaryError, setSummaryError] = useState(null);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
-  // How to Play modal state
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const [loadingHowToPlay, setLoadingHowToPlay] = useState(false);
   const [howToPlayInstructions, setHowToPlayInstructions] = useState("");
