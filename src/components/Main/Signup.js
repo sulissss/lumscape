@@ -27,7 +27,7 @@ const Signup = ({ setIsLoggedIn, setUserScope }) => {
     }
 
     try {
-      await axios.post(process.env.BACKEND_ENDPOINT + '/users/signup', {
+      await axios.post(process.env.BACKEND_ENDPOINT + '/auth/signup', {
         email: email,
         password: password,
         scope: scope,
