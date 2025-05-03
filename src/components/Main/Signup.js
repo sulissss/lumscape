@@ -8,7 +8,6 @@ const Signup = ({ setIsLoggedIn, setUserScope }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [scope, setScope] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
@@ -28,13 +27,12 @@ const Signup = ({ setIsLoggedIn, setUserScope }) => {
     }
 
     try {
-      await axios.post('https://lums-3d-planner.vercel.app/users/signup', {
+      await axios.post(process.env.BACKEND_ENDPOINT + '/users/signup', {
         email: email,
         password: password,
         scope: scope,
       });
 
-      // localStorage.setItem("userScope", scope);
       setUserScope(scope);
       setSuccessMessage("Signup successful!");
       setTimeout(() => {
@@ -46,13 +44,10 @@ const Signup = ({ setIsLoggedIn, setUserScope }) => {
     } catch (error) {
       if (error.response) {
         setErrorMessage(error.response.data.message || 'Signup failed. Please try again.');
-        console.error('Signup error (server response):', error.response);
       } else if (error.request) {
         setErrorMessage('Network error. Please try again.');
-        console.error('Signup error (no response):', error.request);
       } else {
         setErrorMessage('An unexpected error occurred. Please try again.');
-        console.error('Signup error (other):', error.message);
       }
       setTimeout(() => setErrorMessage(null), 3000);
     }
@@ -103,16 +98,6 @@ const Signup = ({ setIsLoggedIn, setUserScope }) => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-
-          {/* <select
-            className="scope-select"
-            value={scope}
-            onChange={(e) => setScope(e.target.value)}
-          >
-            <option value="">Select Account Type</option>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select> */}
 
           <button className="login-button" type="submit">
             Create an Account

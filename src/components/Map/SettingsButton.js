@@ -10,7 +10,7 @@ const SettingsButton = () => {
   const [howToPlayInstructions, setHowToPlayInstructions] = useState("");
   const [howToPlayError, setHowToPlayError] = useState(null);
   const [fullscreen, setFullscreen] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleFullscreenToggle = () => {
     if (!fullscreen) {
@@ -38,8 +38,8 @@ const SettingsButton = () => {
   };
 
   const handleBackToMap = () => {
-    navigate("/map"); // Navigate to the map route
-    setShowSettings(false); // Close the settings panel
+    navigate("/map");
+    setShowSettings(false);
   };
 
   return (
@@ -47,9 +47,7 @@ const SettingsButton = () => {
       <button
         onClick={() => setShowSettings(!showSettings)}
         className="settings-button"
-      >
-        {/* Settings Icon (image from CSS) */}
-      </button>
+      ></button>
 
       {showSettings && !showHowToPlay && (
         <>
@@ -68,7 +66,7 @@ const SettingsButton = () => {
                   setShowSettings(false);
                   setHowToPlayError(null);
                   try {
-                    const res = await fetch('/how_to_play.txt');
+                    const res = await fetch(process.env.INSTRUCTIONS_PATH);
                     if (!res.ok) throw new Error('Failed to fetch instructions');
                     const text = await res.text();
                     setHowToPlayInstructions(text);

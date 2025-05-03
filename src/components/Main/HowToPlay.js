@@ -1,5 +1,4 @@
 import React from "react";
-// import "../../style/main/Summary.css";
 import "../../style/main/HowToPlay.css";
 
 const HowToPlay = ({ instructions, onClose, origin }) => {

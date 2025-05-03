@@ -15,16 +15,14 @@ const Login = ({ setIsLoggedIn, setUserScope }) => {
 
     if (email && password) {
       try {
-        const response = await axios.post('https://lums-3d-planner.vercel.app/users/login', {
+        const response = await axios.post(process.env.BACKEND_ENDPOINT + '/users/login', {
           email,
           password,
         });
 
         if (response.data.success) {
-          // Store user scope (admin/user) in localStorage
           if (response.data.message) {
             setUserScope(response.data.message);
-            // localStorage.setItem("userScope", response.data.message);
           }
           setSuccessMessage("Login successful!");
           setTimeout(() => {

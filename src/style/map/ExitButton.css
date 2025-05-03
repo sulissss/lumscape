@@ -27,7 +27,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.551);
-  backdrop-filter: blur(5px); /* Add blur effect */
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,13 +40,13 @@
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  font-family: "MinecraftFont", sans-serif; /* Add font family */
+  font-family: "MinecraftFont", sans-serif;
 }
 
 .confirmation-buttons {
   margin-top: 20px;
-  display: flex; /* Use flexbox for button layout */
-  justify-content: center; /* Center buttons horizontally */
+  display: flex;
+  justify-content: center;
 }
 
 .confirm-button,

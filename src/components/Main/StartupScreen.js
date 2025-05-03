@@ -27,7 +27,8 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn, userScope }) => {
   const isCacheValid = (timestamp) => {
     if (!timestamp) return false;
     const now = Date.now();
-    return now - timestamp < 24 * 60 * 60 * 1000;
+    const numHours = process.env.CACHE_VALIDITY_HOURS;
+    return now - timestamp < numHours * 60 * 60 * 1000;
   };
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn, userScope }) => {
     if (cached && isCacheValid(Number(cachedTime))) {
       setEvents(JSON.parse(cached));
     } else {
-      fetch("https://lums-3d-planner.vercel.app/events")
+      fetch(process.env.BACKEND_ENDPOINT + '/events')
         .then((response) => {
           if (!response.ok) throw new Error("Failed to fetch events");
           return response.json();
@@ -125,7 +126,6 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn, userScope }) => {
   };
 
   const handleToggleSound = () => {
-    // setHasInteracted(true);
     setSoundOn((prev) => {
       const newState = !prev;
       if (audioRef.current) {
@@ -141,7 +141,6 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn, userScope }) => {
 
   return (
     <div className="bg-container">
-      {/* Sound Toggle Button */}
       <button
         className="sound-toggle-btn"
         onClick={handleToggleSound}
@@ -151,7 +150,6 @@ const StartupScreen = ({ isLoggedIn, setIsLoggedIn, userScope }) => {
         {soundOn ? <img src="/assets/sound-on.png" alt="Sound On"  className="sound-icon" /> 
                   : <img src="/assets/sound-off.png" alt="Sound Off" className="sound-icon"  />}
       </button>
-      {/* Background Music */}
       <audio
         ref={audioRef}
         src="/assets/background_music.mp3"

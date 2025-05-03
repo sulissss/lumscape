@@ -13,8 +13,7 @@ const App = () => {
   const [userScope, setUserScope] = useState(localStorage.getItem('userScope') || null);
 
   useEffect(() => {
-    // Decoy request to backend for DB warmup
-    fetch("https://lums-3d-planner.vercel.app/events").catch(() => {});
+    fetch(process.env.BACKEND_ENDPOINT + "/events").catch(() => {});
   }, []);
 
   return (
@@ -24,7 +23,7 @@ const App = () => {
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserScope={setUserScope} />} />
         <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn} setUserScope={setUserScope} />} />
         <Route path="/create-event" element={<EventCreation />} />
-        <Route path="/map" element={<UnityMap />} /> {/* Route for Unity map */}
+        <Route path="/map" element={<UnityMap />} />
       </Routes>
     </Router>
   );

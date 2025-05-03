@@ -8,7 +8,7 @@
   font-size: 18px;
   font-family: "MinecraftFont", sans-serif;
   background: linear-gradient(to bottom, #777, #555);
-  background-image: url("../../../public/assets/settings_icon.png"); /* Path to your settings icon */
+  background-image: url("../../../public/assets/settings_icon.png");
   background-size: cover;
   background-position: center;
   border: none;

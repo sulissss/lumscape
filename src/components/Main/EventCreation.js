@@ -34,7 +34,7 @@ const EventCreation = () => {
     if (eventName && eventLocation && eventDescription && eventDate && eventTime) {
       try {
         const response = await axios.post(
-          "https://lums-3d-planner.vercel.app/events",
+          process.env.BACKEND_ENDPOINT + "/events",
           {
             eventName,
             eventDescription,
@@ -61,7 +61,6 @@ const EventCreation = () => {
         setTimeout(() => {
           setErrorMessage(null);
         }, 3000);
-        console.error("Event creation error:", error);
       }
     } else {
       setErrorMessage("Please fill in all fields.");
