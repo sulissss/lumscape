@@ -34,7 +34,7 @@ const EventCreation = () => {
     if (eventName && eventLocation && eventDescription && eventDate && eventTime) {
       try {
         const response = await axios.post(
-          process.env.BACKEND_ENDPOINT + "/events",
+          "https://lums-3d-planner-sigma.vercel.app/events",
           {
             eventName,
             eventDescription,
