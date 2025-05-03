@@ -13,7 +13,7 @@ const App = () => {
   const [userScope, setUserScope] = useState(localStorage.getItem('userScope') || null);
 
   useEffect(() => {
-    fetch(process.env.BACKEND_ENDPOINT + "/events").catch(() => {});
+    fetch("https://lums-3d-planner-sigma.vercel.app" + "/events").catch(() => {});
   }, []);
 
   return (

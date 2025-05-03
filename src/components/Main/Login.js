@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn, setUserScope }) => {
 
     if (email && password) {
       try {
-        const response = await axios.post(process.env.BACKEND_ENDPOINT + '/auth/login', {
+        const response = await axios.post("https://lums-3d-planner-sigma.vercel.app" + '/auth/login', {
           email,
           password,
         });
@@ -35,11 +35,11 @@ const Login = ({ setIsLoggedIn, setUserScope }) => {
         if (error.response && error.response.status === 401) {
           setErrorMessage("Invalid credentials. Try Again.");
         } else {
-          setErrorMessage(`Network error: ${error.message}`);
+          setErrorMessage("Network error. Try Again later.");
         }
       }
     } else {
-      setErrorMessage("Please enter valid credentials!");
+      setErrorMessage("Please fill in all fields.");
       setTimeout(() => setErrorMessage(null), 3000);
     }
   };

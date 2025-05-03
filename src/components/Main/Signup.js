@@ -27,7 +27,7 @@ const Signup = ({ setIsLoggedIn, setUserScope }) => {
     }
 
     try {
-      await axios.post(process.env.BACKEND_ENDPOINT + '/auth/signup', {
+      await axios.post("https://lums-3d-planner-sigma.vercel.app" + '/auth/signup', {
         email: email,
         password: password,
         scope: scope,
