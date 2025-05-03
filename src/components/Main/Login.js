@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn, setUserScope }) => {
 
     if (email && password) {
       try {
-        const response = await axios.post("https://lums-3d-planner-sigma.vercel.app" + '/auth/login', {
+        const response = await axios.post(process.env.BACKEND_ENDPOINT + '/auth/login', {
           email,
           password,
         });
